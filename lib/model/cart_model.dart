@@ -1,42 +1,41 @@
 import 'package:flutter/material.dart';
- 
-class CartModel extends ChangeNotifier{
-  //list items on sale
-  final List _shopItems = [
-    // [itemName,itemPrice,imagePath,color]
-    ["Avocado", "4.0", "lib/images/avocado.png",Colors.green],
-    ["Banana", "2.5", "lib/images/banana.png",Colors.yellow],
-    ["Chicken", "12.80","lib/images/chicken.png",Colors.brown],
-    ["Water", "1.0", "lib/images/water.png",Colors.blue],
+
+class CartModel extends ChangeNotifier {
+  // List of shop items
+  final List<List<dynamic>> shopItems = [
+    // [ itemName, itemPrice, imagePath, color ]
+    ["Avocado", "4.00", "lib/images/avocado.png", Colors.green],
+    ["Banana", "2.50", "lib/images/banana.png", Colors.yellow],
+    ["Chicken", "12.80", "lib/images/chicken.png", Colors.brown],
+    ["Water", "1.00", "lib/images/water.png", Colors.blue],
+    // Add more items...
   ];
 
-  //list of cart items
+  // list of cart items
+  List _cartItems = [];
 
- List _cartItems =[];
+  get cartItems => _cartItems;
 
-  get shopItems => _shopItems;
+  get shopItem => shopItems;
 
-  get cartItems => _shopItems;
-
-  //add items to cart 
-  void addItemToCart(int index){
-    _cartItems.add(_shopItems[index]);
+  // add item to cart
+  void addItemToCart(int index) {
+    _cartItems.add(shopItems[index]);
     notifyListeners();
   }
 
-  //Remove items to cart
-  void removeItemsFromCart(int index){
+  // remove item from cart
+  void removeItemFromCart(int index) {
     _cartItems.removeAt(index);
-    notifyListeners ();
+    notifyListeners();
   }
 
-  //calculate total price
-  String calculateTotal(){
-    double totalPrice=0;
-    for (int i=0;i < _cartItems.length;i++){
-      totalPrice += double.parse(_cartItems[i] [i]);
-} 
-      return totalPrice.toStringAsFixed(2);
+  // calculate total price
+  String calculateTotal() {
+    double totalPrice = 0;
+    for (int i = 0; i < cartItems.length; i++) {
+      totalPrice += double.parse(cartItems[i][1]);
+    }
+    return totalPrice.toStringAsFixed(2);
   }
-
 }
