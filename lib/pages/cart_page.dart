@@ -17,9 +17,18 @@ class CartPage extends StatelessWidget {
       ),
       body: Consumer<CartModel>(
         builder: (context, value, child) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+         if (value.cartItems.isEmpty) {
+  return Center(
+    child: Text(
+      "Your cart is empty 🛒",
+      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    ),
+  );
+}
+
+return Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: [
               // Let's order fresh items for you
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 24.0),
